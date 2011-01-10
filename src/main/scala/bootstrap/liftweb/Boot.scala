@@ -39,17 +39,10 @@ class Boot {
     // where to search snippet
     LiftRules.addToPackages("code")
 
-    // Build SiteMap
-    val entries = List(
-      Menu.i("Home") / "index", // the simple way to declare a menu
-
-      // more complex because this menu allows anything in the
-      // /static path to be visible
-      Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
-	       "Static Content"))) :::
-    // the User management menu items
-    User.sitemap
-
+		val entries = List(
+			Menu(Loc("Home", List("index"), "Home")) ,
+			Menu(Loc("Summary", List("summary"), "Summary")))
+		
     // set the sitemap.  Note if you don't want access control for
     // each page, just comment this line out.
     LiftRules.setSiteMap(SiteMap(entries:_*))
