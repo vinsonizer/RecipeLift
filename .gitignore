@@ -4,3 +4,5 @@ project/build/target/
 target/
 *db.h2.db
 *db.lock.db
+derbyDB
+derby.log
