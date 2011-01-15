@@ -1,4 +1,4 @@
-package code {
+package com.recipelift {
 	package snippet {
 
 		import _root_.scala.xml.{NodeSeq, Text}
