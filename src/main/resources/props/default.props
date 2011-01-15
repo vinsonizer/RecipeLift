@@ -1,4 +1,4 @@
-db.driver=org.apache.derby.jdbc.EmbeddedDriver
-db.url=jdbc:derby:derbyDB;create=true
+db.driver=
+db.url=
 db.user=
 db.password=
