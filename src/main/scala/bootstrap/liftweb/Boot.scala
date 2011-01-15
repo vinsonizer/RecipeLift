@@ -10,7 +10,7 @@ import sitemap._
 import Loc._
 import mapper._
 
-import code.model._
+import com.recipelift.model._
 
 
 /**
@@ -37,7 +37,7 @@ class Boot {
     Schemifier.schemify(true, Schemifier.infoF _, User)
 
     // where to search snippet
-    LiftRules.addToPackages("code")
+    LiftRules.addToPackages("com.recipelift")
 
 		val entries = List(
 			Menu(Loc("Home", List("index"), "Home")) ,

@@ -1,4 +1,4 @@
-package code {
+package com.recipelift {
 package model {
 
 import _root_.net.liftweb.mapper._
