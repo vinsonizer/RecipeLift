@@ -3,3 +3,4 @@ project/boot/
 project/build/target/
 target/
 testDb*
+lift_proto.db*
