@@ -7,9 +7,12 @@ class Ingredient extends LongKeyedMapper[Ingredient] with IdPK {
 	def getSingleton = Ingredient
 	
 	object amount extends MappedDecimal(this,MathContext.DECIMAL64, 2)
-	object unit extends  MappedString(this, 20)
-	object name extends MappedString(this, 100)
+	object unit extends  MappedString(this, 20) 
+	object name extends MappedString(this, 100) {
+		override def dbIndexed_? = true
+	}
 	object modifier extends MappedString(this, 200)
+	object recipe extends MappedLongForeignKey(this, Recipe)
 }
 
 object Ingredient extends Ingredient with LongKeyedMetaMapper[Ingredient] {
