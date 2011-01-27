@@ -1,5 +1,6 @@
 <lift:surround with="default" at="content">
-	<lift:RecipeHelper.add form="POST">
+	<lift:RecipeHelper.addOrUpdate form="POST">
+		<entry:id/>
 		<label for="name">Name:</label>
 		<entry:name/><br/>
 		<label for="serves">Serves:</label>
@@ -11,5 +12,5 @@
 		<label for="directions">Directions:</label>
 		<entry:directions/><br/>
 		<entry:submit/>
-	</lift:RecipeHelper.add>
+	</lift:RecipeHelper.addOrUpdate>
 </lift:surround>

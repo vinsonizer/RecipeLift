@@ -11,13 +11,14 @@ package com.recipelift {
 
 		class RecipeHelper {
 			
+			object id extends RequestVar("")
 			object name extends RequestVar("")
 			object serves extends RequestVar("0")
 			object activeTime extends RequestVar("0")
 			object totalTime extends RequestVar("0")
 			object directions extends RequestVar("")
 			
-			def add(xhtml: NodeSeq) : NodeSeq = {
+			def addOrUpdate(xhtml: NodeSeq) : NodeSeq = {
 				
 				
 				def processEntryAdd () =  { 
@@ -25,7 +26,8 @@ package com.recipelift {
 					.dateAdded(new Date())
 					.directions(directions.is)
 					.saveMe
-
+					
+					S.redirectTo("recipeList")
 				}
 				
 				def textField(variable: RequestVar[String], id: String) = {
@@ -33,6 +35,7 @@ package com.recipelift {
 				}
 				
 				bind("entry", xhtml,
+				  "id"              -%> SHtml.hidden(() => println("submitted for id is " + id.is)),
 					"name"         -%> textField(name, "name"),
 					"serves"       -%> textField(serves, "serves"),
 					"activeTime" -%> textField(activeTime, "activeTime"),
@@ -50,7 +53,8 @@ package com.recipelift {
 				<div>
 				  <ul>
 				  {for (recipe <- recipes)  yield
-							<li><a href="#">{recipe.name}</a></li>
+							//<li><a href="#">{recipe.name}</a></li>
+						  <li>{ SHtml.link("recipeAdd", () => println("clicked"), <i>{recipe.name}</i>) }</li>
 					}
 					</ul>
 			  </div>
