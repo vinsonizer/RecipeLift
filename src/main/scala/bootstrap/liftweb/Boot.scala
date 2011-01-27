@@ -20,10 +20,10 @@ import com.recipelift.model._
 class Boot {
   def boot {
     if (!DB.jndiJdbcConnAvailable_?) {
-      val vendor = 
-	new StandardDBVendor(Props.get("db.driver") openOr "org.h2.Driver",
+      val vendor = new StandardDBVendor(
+					 Props.get("db.driver") openOr "org.h2.Driver",
 			     Props.get("db.url") openOr 
-			     "jdbc:h2:lift_proto.db;AUTO_SERVER=TRUE",
+			     "jdbc:h2:mem:recipelift.db;DB_CLOSE_DELAY=-1",
 			     Props.get("db.user"), Props.get("db.password"))
 
       LiftRules.unloadHooks.append(vendor.closeAllConnections_! _)
@@ -34,14 +34,17 @@ class Boot {
     // Use Lift's Mapper ORM to populate the database
     // you don't need to use Mapper to use Lift... use
     // any ORM you want
-    Schemifier.schemify(true, Schemifier.infoF _, User, Ingredient)
+    Schemifier.schemify(true, Schemifier.infoF _, User, Recipe, Ingredient)
 
     // where to search snippet
 		LiftRules.addToPackages("com.recipelift")
 
 		val entries = List(
-			Menu(Loc("Home", List("index"), "Home")) ,
-			Menu(Loc("Summary", List("summary"), "Summary")))
+			Menu(Loc("Home", List("index"), "Home", Hidden)) ,
+			Menu(Loc("Summary", List("summary"), "Summary")),
+			Menu(Loc("Recipe List", List("recipeList"), "Recipe List")),
+			Menu(Loc("Add Recipe", List("recipeAdd"), "Add Recipe"))
+		)
 		
     // set the sitemap.  Note if you don't want access control for
     // each page, just comment this line out.

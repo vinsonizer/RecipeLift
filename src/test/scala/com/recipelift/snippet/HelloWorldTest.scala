@@ -1,4 +1,4 @@
-package code {
+package com.recipelift {
 package snippet {
 
 import org.specs._
