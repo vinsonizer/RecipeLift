@@ -43,7 +43,7 @@ class Boot {
 			Menu(Loc("Home", List("index"), "Home", Hidden)) ,
 			Menu(Loc("Summary", List("summary"), "Summary")),
 			Menu(Loc("Recipe List", List("recipeList"), "Recipe List")),
-			Menu(Loc("Add Recipe", List("recipeAdd"), "Add Recipe"))
+			Menu(Loc("Add Recipe", List("recipeEdit"), "Add Recipe"))
 		)
 		
     // set the sitemap.  Note if you don't want access control for
@@ -67,4 +67,14 @@ class Boot {
     // Make a transaction span the whole HTTP request
     S.addAround(DB.buildLoanWrapper)
   }
+
+	def setupCustomDispatch() = {
+		LiftRules.statelessRewrite.prepend(NamedPF("ProductExampleRewrite") {
+			case RewriteRequest(
+					ParsePath("edit" :: id :: Nil, _, _,_), _, _) => 
+				RewriteResponse(
+					"recipeEdit" :: Nil, Map("id" -> id)  // Use webapp/edit.html
+			)
+		})
+	}
 }

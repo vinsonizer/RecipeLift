@@ -35,16 +35,16 @@ package com.recipelift {
 				}
 				
 				bind("entry", xhtml,
-				  "id"              -%> SHtml.hidden(() => println("submitted for id is " + id.is)),
+				  "id"               -%> SHtml.hidden(id(_), id.is, "id" -> "id"),
 					"name"         -%> textField(name, "name"),
 					"serves"       -%> textField(serves, "serves"),
 					"activeTime" -%> textField(activeTime, "activeTime"),
 					"totalTime"   -%> textField(totalTime, "totalTime"),
 					"directions"  -%> SHtml.textarea(
-						directions.is, 
-						directions(_), 
-						"cols" -> "80", 
-						"rows" -> "8"),
+							directions.is, 
+							directions(_), 
+							"cols" -> "80", 
+							"rows" -> "8"),
 					"submit" -> SHtml.submit("Add", processEntryAdd))
 			}
 			
@@ -54,7 +54,7 @@ package com.recipelift {
 				  <ul>
 				  {for (recipe <- recipes)  yield
 							//<li><a href="#">{recipe.name}</a></li>
-						  <li>{ SHtml.link("recipeAdd", () => println("clicked"), <i>{recipe.name}</i>) }</li>
+						  <li>{ SHtml.link("edit/" + recipe.id.is, () => println("clicked"), <i>{recipe.name}</i>) }</li>
 					}
 					</ul>
 			  </div>
